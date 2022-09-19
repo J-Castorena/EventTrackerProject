@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.wodtracker.entities.Wod;
 import com.skilldistillery.wodtracker.services.WodService;
-@CrossOrigin({"*", "http://localhost/"})
+@CrossOrigin({"*", "http://localhost:4202"})
 @RestController
 @RequestMapping("api")
 public class WodController {

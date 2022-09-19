@@ -1,0 +1,125 @@
+<br>
+<h1 id="wodHeader">WOD HOME PAGE</h1>
+<br>
+<section class="hero carousel-hero">
+<div id="carouselDiv">
+<ngb-carousel *ngIf="images">
+  <ng-template ngbSlide>
+    <div class="carousel-item active">
+      <img src="https://i.postimg.cc/gjtQFKX5/wod5.jpg" alt="Random first slide">
+    </div>
+    <div class="carousel-caption">
+      <h3></h3>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="carousel-item active">
+      <img src="https://i.postimg.cc/fy91x9g0/wod4.webp" alt="Random second slide">
+    </div>
+    <div class="carousel-caption">
+      <h3></h3>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="carousel-item active">
+      <img src="https://i.postimg.cc/4y5q85Pj/wod3.webp" alt="Random third slide">
+    </div>
+    <div class="carousel-caption">
+      <h3></h3>
+    </div>
+  </ng-template>
+</ngb-carousel>
+</div>
+</section>
+<br>
+<div id="masterList" *ngIf="!selectedWod">
+<table class="table table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Date</th>
+      <th scope="col">Description</th>
+      <th scope="col">Personal Time</th>
+      <th scope="col">Comments</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let wod of wods; index as i ">
+      <td>{{wod.id}}</td>
+      <td (click)="showSingleWod(wod)">{{wod.name}}</td>
+      <td>{{wod.date}}</td>
+      <td>{{wod.description}}</td>
+      <td>{{wod.personalTime}}</td>
+      <td>{{wod.comments}}</td>
+      <td><button (click)="deleteWod(wod.id)" class="btn btn-danger btn-sm">x</button></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div *ngIf="!selectedWod">
+  <button *ngIf="!displayNewWodForm" name="createWod" (click)="displayAddWodForm()">Add WOD</button>
+</div>
+
+<div *ngIf="displayNewWodForm">
+<form>
+  <label for="name">NAME: </label>
+	<input type="text" id="name" name="name" [(ngModel)]="newWod.name"/><br>
+	<label for="date">DATE: </label>
+	<input type="date" id="date" name="date" [(ngModel)]="newWod.date"/><br>
+	<label for="description">DESCRIPTION: </label>
+	<input type="text" id="description" name="description" [(ngModel)]="newWod.description"/><br>
+	<label for="personalTime">PERSONAL TIME:: </label>
+	<input type="time" id="personalTime" name="personalTime" [(ngModel)]="newWod.personalTime"/><br>
+	<label for="comments">COMMENTS: </label>
+	<input type="text" id="comments" name="comments" [(ngModel)]="newWod.comments"/><br>
+  <input type="submit" (click)="createWod(newWod)">
+</form>
+</div>
+<br>
+<div *ngIf="selectedWod">
+<table class="table table-stripe">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Date</th>
+      <th scope="col">Description</th>
+      <th scope="col">Personal Time</th>
+      <th scope="col">Comments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{selectedWod.id}}</td>
+      <td>{{selectedWod.name}}</td>
+      <td>{{selectedWod.date}}</td>
+      <td>{{selectedWod.description}}</td>
+      <td>{{selectedWod.personalTime}}</td>
+      <td>{{selectedWod.comments}}</td>
+    </tr>
+    <br>
+      <button (click)="displayTable(); ">Back</button>
+      <button (click)="setUpdateWod()">Edit</button>
+  </tbody>
+</table>
+
+</div>
+
+<div *ngIf="setEditWod">
+  <form>
+  <label for="name">NAME: </label>
+	<input type="text" id="name" name="name" [(ngModel)]="setEditWod.name"/><br>
+	<label for="date">DATE: </label>
+	<input type="date" id="date" name="date" [(ngModel)]="setEditWod.date"/><br>
+	<label for="description">DESCRIPTION: </label>
+	<input type="text" id="description" name="description" [(ngModel)]="setEditWod.description"/><br>
+	<label for="personalTime">PERSONAL TIME:: </label>
+	<input type="time" id="personalTime" name="personalTime" [(ngModel)]="setEditWod.personalTime"/><br>
+	<label for="comments">COMMENTS: </label>
+	<input type="text" id="comments" name="comments" [(ngModel)]="setEditWod.comments"/><br>
+  <input type="submit" (click)="updateWod(setEditWod)">
+  </form>
+</div>
